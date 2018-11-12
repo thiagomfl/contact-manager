@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
@@ -6,13 +7,16 @@ export default function Header(props) {
     const {branding} = props;
 
     return (
-        <nav className="navbar navbar-dark bg-primary mb-3 py-0">
+        <nav className="navbar navbar-dark bg-primary navbar-expand mb-3">
             <div className="container">
-                <a href="/" className="navbar-brand">{branding}</a>
+                <Link to="/" className="navbar-brand">{branding}</Link>
                 <div>
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <a href="/" className="nav-link">Home</a>
+                            <Link to="/contact/add" className="nav-link">Add</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/about" className="nav-link">About</Link>
                         </li>
                     </ul>
                 </div>

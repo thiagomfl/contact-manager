@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
 import {Consumer} from '../../context';
+import axios from 'axios';
 
 export default class Contact extends Component {
     state = {
         showContactInfo: true
     }
 
-    onUpdateClick = () => {
-        console.log('Update Button')
-    }
-
-    onDeleteClick = (id, dispatch) => { 
-        dispatch({
-            type: 'DELETE_CONTACT',
-            payload: id
-        });
+    onDeleteClick = async (id, dispatch) => { 
+        try { await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+            dispatch({
+                    type: 'DELETE_CONTACT',
+                    payload: id
+                })
+        } catch(e) {
+            dispatch({
+                type: 'DELETE_CONTACT',
+                payload: id
+            })
+        }
+        
     }
 
     onShowClick = e => {
@@ -42,10 +48,11 @@ export default class Contact extends Component {
                                 style={{cursor: 'pointer', float: 'right', color: 'red'}}
                                 onClick={this.onDeleteClick.bind(this, id, dispatch)}
                                 ></i>
-                            <i className="far fa-edit " 
+                            <Link to={`contact/edit/${id}`}>
+                                <i className="far fa-edit " 
                                 style={{cursor: 'pointer', float: 'right'}}
-                                onClick={this.onUpdateClick}
                                 ></i>
+                            </Link>
                             
                         </h4>
                         {showContactInfo ? (

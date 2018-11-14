@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import TextInputGroup from '../layout/TextInputGroup'
 
-export default class AddContact extends Component {
+export default class EditContact extends Component {
     state = {
         name: '',
         email: '',
@@ -15,6 +15,19 @@ export default class AddContact extends Component {
     onChange = (e) => {
         this.setState({
             [e.target.name]:e.target.value
+        })
+    }
+
+    async componentDidMount() {
+        const {id} = this.props.match.params;
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+
+        const contact = res.data;
+
+        this.setState({
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone
         })
     }
 
@@ -50,20 +63,19 @@ export default class AddContact extends Component {
             return;
         }
 
-
-
-        const newContact = {
+        const updContact = {
             name,
             email,
             phone
         }
 
-        const  res = await axios.post('https://jsonplaceholder.typicode.com/users/', newContact)
-        
+        const {id} = this.props.match.params;
+        const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updContact);
+
         dispatch({
-            type: 'ADD_CONTACT',
+            type: 'UPDATE_CONTACT', 
             payload: res.data
-        });
+        })
 
         // Clear State
         this.setState ({
@@ -86,7 +98,7 @@ export default class AddContact extends Component {
                     return (
                         <div className="card mb-3">
                             <div className="card-header">
-                                <h3>Add Contact</h3>
+                                <h3>Edit Contact</h3>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={this.onSubmit.bind(this, dispatch)}>
@@ -119,7 +131,7 @@ export default class AddContact extends Component {
                                          />
                                     <input 
                                         type="submit"
-                                        value="Add Contact"
+                                        value="Update Contact"
                                         className="btn btn-primary btn-block" />
                                 </form>
                             </div>

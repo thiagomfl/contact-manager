@@ -1,35 +1,46 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
+const Header = props => {
+  const { branding } = props;
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div className="container">
+        <a className="navbar-brand" href="/">{branding}</a>
+        <div className="">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">
+                <i className="fas fa-home" /> Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/contact/add" className="nav-link">
+                <i className="fas fa-plus" /> Add
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/about" className="nav-link">
+                <i className="fas fa-question" /> About
+              </Link>
+            </li>
+          
+          </ul>
+          
+      </div>
+      </div>
+    </nav>
 
-export default function Header(props) {
-    const {branding} = props;
-
-    return (
-        <nav className="navbar navbar-dark bg-primary navbar-expand mb-3">
-            <div className="container">
-                <Link to="/" className="navbar-brand">{branding}</Link>
-                <div>
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <Link to="/contact/add" className="nav-link">Add</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/about" className="nav-link">About</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>  
-    )       
-}
+  );
+};
 
 Header.defaultProps = {
-    branding: "Contact Manager"
-}
+  branding: 'My App'
+};
 
 Header.propTypes = {
-    branding: PropTypes.string.isRequired
-}
+  branding: PropTypes.string.isRequired
+};
 
+export default Header;

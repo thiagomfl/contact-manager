@@ -11,9 +11,10 @@
 contacts like a agenda on cellphone.
 
 #
-### This project was made with `React.JS`.
+### This project was made with `React.JS and Redux`.
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+To learn Redux, check out the [React documentation](https://redux.js.org/).
 
 ## Available Scripts
 

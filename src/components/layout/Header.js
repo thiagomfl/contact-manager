@@ -2,14 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import '../Toolbar/Toolbar'
+import DrawerToggleButton from '../SideDrawer/DrawerToggleButton';
+
 const Header = props => {
   const { branding } = props;
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
-        <a className="navbar-brand" href="/">{branding}</a>
+          <div className="toolbar-toggle-button">
+            <DrawerToggleButton click={props.drawerToggleClickHandler} />
+         </div>
+        <a className="navbar-brand toolbar-logo" href="/">{branding}</a>
         <div className="">
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav ul-link mr-auto">
             <li className="nav-item">
               <Link to="/" className="nav-link">
                 <i className="fas fa-home" /> Home

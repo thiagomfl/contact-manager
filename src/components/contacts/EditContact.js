@@ -76,7 +76,7 @@ class EditContact extends Component {
     const { name, email, phone, errors } = this.state;
 
     return (
-      <div className="card mb-3">
+      <div className="card mb-3 mt-2">
         <div className="card-header">Edit Contact</div>
         <div className="card-body">
           <form onSubmit={this.onSubmit}>
